@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :views, Proc.new { File.join(root, "../views/") }
@@ -34,6 +36,7 @@ class ApplicationController < Sinatra::Base
     # @user = User.find_by(email: params["email"], password: params["password"])
     # session[:user_id] = @user.id
     @user = User.find_by(email: params[:email], password: params[:password])
+    binding.pry
     if @user
       session[:user_id] = @user.id
       redirect '/users/home'
